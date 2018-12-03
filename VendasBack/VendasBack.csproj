@@ -180,6 +180,10 @@
     <Compile Include="Migrations\201812030527583_Inicial.Designer.cs">
       <DependentUpon>201812030527583_Inicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812030601185_EventoOrcamento Correcoes.cs" />
+    <Compile Include="Migrations\201812030601185_EventoOrcamento Correcoes.Designer.cs">
+      <DependentUpon>201812030601185_EventoOrcamento Correcoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoOrcamento.cs" />
@@ -276,6 +280,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812030527583_Inicial.resx">
       <DependentUpon>201812030527583_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812030601185_EventoOrcamento Correcoes.resx">
+      <DependentUpon>201812030601185_EventoOrcamento Correcoes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
