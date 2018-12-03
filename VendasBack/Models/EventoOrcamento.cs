@@ -15,12 +15,9 @@ namespace VendasBack.Models
         [Key]
         public int IdEventoOrcamento { get; set; }
         [Required]
-        public int quantidade { get; set; }
-        [Required]
-        public System.DateTime? dataPedido { get; set; }
-        [Required]
-        public string cliente { get; set; }
-
+        public string Fornecedor { get; set; }
+        public double Gasto { get; set; }
+        public double Orcamento { get; set; }
 
         //Foreign key for Evento
         public int IdEventoFK { get; set; }
