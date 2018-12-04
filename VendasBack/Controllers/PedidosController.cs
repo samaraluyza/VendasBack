@@ -117,7 +117,7 @@ namespace VendasBack.Controllers
         }
 
 
-        [Route("api/PedidosPeriodo/{inicio}/{fim}")]
+        [Route("PedidosPeriodo/{inicio}/{fim}")]
         [ResponseType(typeof(List<Pedido>))]
         public async Task<IHttpActionResult> GetPedidosPeriodo(DateTime inicio, DateTime fim)
         {
