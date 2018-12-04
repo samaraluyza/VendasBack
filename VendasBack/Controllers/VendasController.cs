@@ -16,6 +16,7 @@ namespace VendasBack.Controllers
     public class VendasController : ApiController
     {
         private VendasBackContext db = new VendasBackContext();
+        static HttpClient client = new HttpClient();
 
         // GET: api/Vendas
         public IQueryable<Venda> GetVendas()
@@ -114,6 +115,41 @@ namespace VendasBack.Controllers
         private bool VendaExists(int id)
         {
             return db.Vendas.Count(e => e.idVenda == id) > 0;
+        }
+
+
+        [Route("GetFaturamento/{mes}")]
+        [ResponseType(typeof(List<Venda>))]
+        public async Task<IHttpActionResult> GetFaturamentoMesAsync(int mes)
+        {
+            var vendasClass = db.Vendas.Where(c => c.data.Month == mes).ToList();
+            if (vendasClass == null)
+            {
+                return BadRequest();
+            }
+
+            double totalVendas = 0;
+            double constant = 1.3;
+            double preco = await GetPrecoAsync();
+
+            foreach (var vendas in vendasClass)
+            {
+                totalVendas += vendas.quantidade * (preco * constant);
+            }
+
+            return Ok(Math.Round(totalVendas, 2));
+        }
+
+        static async Task<double> GetPrecoAsync()
+        {
+            Object valores = null;
+
+            HttpResponseMessage response = await client.GetAsync(@"http://trabalhosige.azurewebsites.net/api/CustoMateriaPrima");
+            if (response.IsSuccessStatusCode)
+            {
+                valores = await response.Content.ReadAsAsync<Object>();
+            }
+            return Convert.ToDouble(valores);
         }
     }
 }
