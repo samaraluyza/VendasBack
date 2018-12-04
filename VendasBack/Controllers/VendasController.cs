@@ -118,7 +118,7 @@ namespace VendasBack.Controllers
         }
 
 
-        [Route("api/Faturamento/{mes}")]
+        [Route("Faturamento/{mes}")]
         [ResponseType(typeof(List<Venda>))]
         public async Task<IHttpActionResult> GetFaturamentoMesAsync(int mes)
         {
@@ -140,7 +140,7 @@ namespace VendasBack.Controllers
             return Ok(Math.Round(totalVendas, 2));
         }
 
-        [Route("api/Faturamento/")]
+        [Route("Faturamento/")]
         [ResponseType(typeof(List<Venda>))]
         public async Task<IHttpActionResult> GetFaturamentoAsync()
         {
