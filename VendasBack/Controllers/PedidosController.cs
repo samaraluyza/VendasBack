@@ -115,5 +115,18 @@ namespace VendasBack.Controllers
         {
             return db.Pedidoes.Count(e => e.IdPedido == id) > 0;
         }
+
+
+        [Route("api/Pedidos/{inicio}/{fim}")]
+        [ResponseType(typeof(List<Pedido>))]
+        public async Task<IHttpActionResult> GetPedidosPeriodo(DateTime inicio, DateTime fim)
+        {
+            var pedidos = await db.Pedidoes.Where(c => (c.dataPedido > inicio) && (c.dataPedido < fim)).ToListAsync();
+            if (pedidos == null)
+            {
+                return BadRequest();
+            }
+            return Ok(pedidos);
+        }
     }
 }
