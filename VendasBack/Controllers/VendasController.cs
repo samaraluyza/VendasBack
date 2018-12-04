@@ -118,11 +118,35 @@ namespace VendasBack.Controllers
         }
 
 
-        [Route("GetFaturamento/{mes}")]
+        [Route("Faturamento/{mes}")]
         [ResponseType(typeof(List<Venda>))]
         public async Task<IHttpActionResult> GetFaturamentoMesAsync(int mes)
         {
             var vendasClass = db.Vendas.Where(c => c.data.Month == mes).ToList();
+            if (vendasClass == null)
+            {
+                return BadRequest();
+            }
+
+            double totalVendas = 0;
+            double constant = 1.3;
+            double preco = await GetPrecoAsync();
+
+            foreach (var vendas in vendasClass)
+            {
+                totalVendas += vendas.quantidade * (preco * constant);
+            }
+
+            return Ok(Math.Round(totalVendas, 2));
+        }
+
+        [Route("Faturamento/")]
+        [ResponseType(typeof(List<Venda>))]
+        public async Task<IHttpActionResult> GetFaturamentoAsync()
+        {
+            DateTime currentyTime = DateTime.UtcNow.Date;
+            var vendasClass = db.Vendas.Where(c => c.data.Year==currentyTime.Year).ToList();
+
             if (vendasClass == null)
             {
                 return BadRequest();
