@@ -7,9 +7,8 @@ namespace VendasBack.Utils
 {
     public enum QualidadeProduto
     {
-        Otimo = 8,
-        Bom = 6,
-        Medio = 4,
-        Ruim = 2
+        Otimo = 3,
+        Medio = 2,
+        Ruim = 1
     }
 }
